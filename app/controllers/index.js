@@ -1,7 +1,7 @@
 var moment = require('alloy/moment');
 
 var pageSize =5;
-var recordCount = 5000;
+var recordCount = 4500;
 
 $.index.open();
 
@@ -59,9 +59,10 @@ function doClick() {
 			Ti.API.log('...added model ==> '+dataColl.length);	
 		}
 				
-		Promise.delay(1000).then(function(){			
+		setTimeout(function(){	
+			Ti.API.log("Resolving doClick");		
 			resolve(dataColl);
-		});
+		}, 1000);
 		Ti.API.log('Leaving doClick  ==> '+dataColl.length);
 	});
 	
@@ -78,19 +79,26 @@ function test()
 	}
 	
 	Ti.API.log("arrOfPromise.length = "+arrOfPromise.length);
-	 return Promise.map (arrOfPromise,function (response, index, length){
-	 	Ti.API.log('[' + index+ '/'+ length+ ']... Processing...');
+	 return Promise.all(arrOfPromise)
+	 .then(function(arrOfResp){
 	 	
-	 	Ti.API.log('Before Save: '+dataColl.length);
-	 	var woStartMom = moment();	 	
-	 	dataColl.each(function(model){	 		
-	 		model.save();
-	 	});	 	
-	 	Ti.API.log('...After Save:' + moment().diff(woStartMom) + ' ms');	 	
-	 } ,{concurrency: 1})
-	 .then(function (){
+	 	Ti.API.log('Promise.all().then');
+	 	
+	 	arrOfResp.map(function (response){
+	 		
+	 	
+	 		Ti.API.log('Before Save: '+dataColl.length);
+		 	var woStartMom = moment();	 	
+		 	dataColl.each(function(model){	 		
+		 		model.save();
+	 		});	 	
+	 		Ti.API.log('...After Save:' + moment().diff(woStartMom) + ' ms');	 	
+	 	});
+	 }).then(function (){
 		Ti.API.log('********All Test executed SUCESSFULLY.********');
-	});
+	 }).catch(function(err) {
+	 	Ti.API.log('Caught error: ' +JSON.stringify(err));
+	 });
 	
 }
 
