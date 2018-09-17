@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
-    <id>com.app.test</id>
+    <id>com.svm.DevResidentialMobility</id>
     <name>ModelTemplateTest</name>
     <version>1.0</version>
     <publisher>ssharma</publisher>
@@ -45,10 +45,10 @@
     <modules/>
     <deployment-targets>
         <target device="android">false</target>
-        <target device="ipad">false</target>
+        <target device="ipad">true</target>
         <target device="iphone">true</target>
     </deployment-targets>
-    <sdk-version>7.4.0.v20180828081144</sdk-version>
+    <sdk-version>7.5.0.v20180829030547</sdk-version>
     <plugins>
         <plugin version="1.0">ti.alloy</plugin>
     </plugins>

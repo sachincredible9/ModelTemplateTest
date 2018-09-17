@@ -1,5 +1,42 @@
 <Alloy>
-	<Window class="container">
-		<Label id="label" >Hello, World</Label>
+	<Collection src="TestModel" id="testModel" instance="true"></Collection>
+	<Collection src="RecommendedSolution" id="recommProdCollection" instance="true"></Collection>
+	<Window class="container">		
+	<View class="fill vgroup" backgroundColor="red">
+		<View class="hgroup middleSectionContainer">
+			
+			<View class="fill vgroup recommendedSolutionsSection">
+				<View class="recommendedSolutionsLabelSection">
+					<Label class="h5 bold recommendedSolutionsLabel" text="Recommended Solution"></Label>
+				</View>
+				<View class="productsRatingSection">
+					<View class="bestRatingSection" height="Ti.UI.FILL" backgroundColor= "#bddecb">
+						<View class="fill" id="productDescriptionListViewContainer">
+							<ListView class="allSolutionsListView" id="productDescriptionListViewId"  onDelete="deleteRecord" separatorStyle="Titanium.UI.TABLE_VIEW_SEPARATOR_STYLE_NONE" defaultItemTemplate="productDesc"> <!-- -->
+								<Templates>
+									<ItemTemplate name="productDesc" height="55">
+										<View class="fill allSolutionsTemplateContainer">
+											<View class="fill allSolutionsLabelContainer hgroup">
+												<View class="size" width="100%">
+													<Label class="left-buffer fill neue" bindId="product" id="productDescListViewAddId"></Label>
+												</View>											
+											</View>
+										</View>
+									</ItemTemplate>
+								</Templates>
+								<ListSection id="section" dataCollection="$.recommProdCollection" dataFilter="filterRecommSolu">
+									<ListItem template='productDesc' canEdit="true" itemId="{ProductCode}" product:text="{ProductDescription}"  />
+								</ListSection>
+							</ListView>
+						</View>
+					</View>
+					<View id="overlapView" class="bestRatingSection" height="0" backgroundColor= "transparent" onClick="loadRecommSolution"></View>
+				</View>
+				
+			</View>
+		</View>
+		
+	</View>
+
 	</Window>
 </Alloy>

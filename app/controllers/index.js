@@ -1,69 +1,27 @@
 var moment = require('alloy/moment');
 
-var pageSize =5;
-var recordCount = 4500;
+
 
 $.index.open();
 
+Alloy.Collections.instance('RecommendedSolution');
 
-var dataColl = Alloy.createCollection('TestModel');
+var dataColl1 = Alloy.createCollection('RecommendedSolution');
 
 function doClick() {
 	return new Promise(function(resolve, reject){
 		Ti.API.log('Inside doClick');
-		dataColl.reset([]);	
-
-		var i=0 ;
-		for(i=0 ; i < recordCount ; i++ )
-		{
-			var dataSet = Alloy.createModel('TestModel');
-			dataSet.set({
-				Element1: "23e31b5e-7777-11e7-80f3-005056818c8e "+i ,
-				Id: i,
-				 Element2 :  "",
-				 Element3 :"Scheduled"   , 
-	
-	
-				 Element4: "5d3b779b-b7c3-11e7-80f6-00505681f1ce"  ,
-				 Element5:  "5464 Pine Oak Ln" , 
-				 Element6:  " 3647834 " ,
-				 Element7:  "Memphis" ,
-				 Element8:  "TNS" , 
-				 Element9:  "38120" ,
-				 Element10: "35.2218"  , 
-				 Element11:  "-89.88057" ,
-	
-				 Element12:  "eebe5e0c-6b45-471d-b1e7-fb0ba4b4d541" +i ,
-	
-				 Element13 : "19016341512" ,
-				 Element14 :  "Cell",
-				 Element14  : "62f182dc-b572-4a72-97f9-064aca148347",
-				 Element15  : '4898647568945',
-				 Element16  : 'phone',
-				 Element17  : '98547684674956',
-				 Element18  : "primary@gmil.com" ,
-	
-				 Element19  : "2018/08/22", 
-				 Element20  : "08:00", 
-				 Element21   : "2018/08/22",	
-				 Element22   : "17:00",
-				 Element23 :  "$WOISCHSTS",	
-	
-				 Element24  : '57839453536' , 
-				 Element25 :  "$ACTDUR",
-				 Element26 :  "RQS34534",
-				 Element27 :  '387938673956',
-				 Element28 :   "15618415569"			 	    
-			});		
-			dataColl.add(dataSet);		
-			Ti.API.log('...added model ==> '+dataColl.length);	
-		}
+		
+		
+		// Add Recommended Solution Records		
+		addRecommendedRecords();		
+		 
 				
 		setTimeout(function(){	
 			Ti.API.log("Resolving doClick");		
-			resolve(dataColl);
+			resolve(dataColl1);
 		}, 1000);
-		Ti.API.log('Leaving doClick  ==> '+dataColl.length);
+		Ti.API.log('Leaving doClick  ==> '+dataColl1.length);
 	});
 	
 }
@@ -74,7 +32,7 @@ function test()
 	Ti.API.log('Alloy', '*********************START TEST**********************' );
 	var arrOfPromise=[];
 	var i=0;
-	for(i; i < pageSize; i++   ){						
+	for(i; i < 1; i++   ){						
 		arrOfPromise.push(doClick());	
 	}
 	
@@ -87,11 +45,13 @@ function test()
 	 	arrOfResp.map(function (response){
 	 		
 	 	
-	 		Ti.API.log('Before Save: '+dataColl.length);
+	 		Ti.API.log('Before Save: '+dataColl1.length);
 		 	var woStartMom = moment();	 	
-		 	dataColl.each(function(model){	 		
+		 	
+	 		
+	 		dataColl1.each(function(model){	 		
 		 		model.save();
-	 		});	 	
+	 		});	 		 	
 	 		Ti.API.log('...After Save:' + moment().diff(woStartMom) + ' ms');	 	
 	 	});
 	 }).then(function (){
@@ -104,6 +64,138 @@ function test()
 
 Ti.API.log('*****Start OF TEST ******');
 test().then(function () {
-	Ti.API.log('*****END OF TEST ******');
+	
+	// Populate Data in to  Recommended ListView.
+	loadRecommSolution();	
 });
 
+
+function addRecommendedRecords(){
+	Ti.API.log('Inside function addRecommendedRecords');
+	dataColl1.reset([]);	
+
+		var i=0 ;
+		for(i=0 ; i < 10 ; i++ )
+		{
+			var dataSet = Alloy.createModel('RecommendedSolution');
+			dataSet.set({
+			 Id:i ,
+		     ProductCode:"23e31b5e-7777-11e7-80f3-005056818c8e "+i,
+		     InspectionId:"374629356875"+i,
+		     AppointmentId:"23462384",		
+		     ProductDescription:"RElated Repair "+i,			
+			 ServiceLine:"fhsvs",
+			 ServiceLine1:"lnkgjdfbgk",
+			 ServiceLine2:"jhgkgdkg",
+			 ServiceLine3:"lhkgjh",
+			 Status:"SOLDD",
+			 isAnswered: 1,
+			 selectionType : "434",
+			 MarketType: "8759345",
+      		 Category: "34762834",
+      		 TemplateCode:"238723",
+      		 PricingScreenReference:"232",        		 
+			});		
+			dataColl1.add(dataSet);		
+			Ti.API.log('...added model ==> '+dataColl1.length);
+			//dataColl1.save();
+			// dataColl1.set({
+				// isSelected : 1
+			// });							
+		}			
+	Ti.API.log('Leaving function addRecommendedRecords');
+}
+
+/* data filter to display the selected product in the cart*/
+function filterRecommSolu(collection) {
+	Ti.API.log('Inside filterRecommSolu..==>>>'+JSON.stringify(collection));
+	return collection.where({
+		isSelected : 1
+	});	
+}
+
+function deleteRecord(e) {
+	
+	Ti.API.info('deleteRecord e : ' + JSON.stringify(e));
+	
+	var selectedProductId = e.itemId;
+	
+	var selectedProductCode = selectedProductId;
+	var recommendedSolutionModel = null;
+
+	
+	var productsColl = Alloy.Collections.instance('RecommendedSolution');
+	
+	Ti.API.log('productsColl = '+productsColl.length);
+	Ti.API.log('Here Length = '+JSON.stringify(productsColl));	
+	var recommSolution = productsColl.where({
+		isSelected: 1
+	});
+	Ti.API.log('Aftre Length = '+recommSolution.length);
+	Ti.API.log('fter Length = '+JSON.stringify(recommSolution));
+	
+	var recommendedSolutionModel = recommSolution[0];	
+
+	
+	Ti.API.log("DATATA == "+JSON.stringify(recommendedSolutionModel));
+	recommendedSolutionModel.set({
+		isSelected: 0,
+		cartSequence : null		
+	});
+	Ti.API.info('End of Function ..'+JSON.stringify(recommendedSolutionModel));
+}
+
+function loadRecommSolution() {
+	Ti.API.log('Inside loadRecommSolution');	
+	var productsColl = Alloy.Collections.instance('RecommendedSolution');
+	productsColl.fetch();		
+	
+	//TEST
+	var listItemsDataArray = [];	
+	$.section.setItems(listItemsDataArray);
+	
+	if(productsColl.length > 0){
+				
+		productsColl.each(function(record) {
+				
+			var listRow = {};
+			
+			listRow["product"]={
+				text:record.get('ProductDescription')
+			};
+			 
+			listRow["itemId"] = {
+				text : record.get('ProductCode')
+			};
+			
+			listRow["isSelected"] = {
+				text : 1
+			};
+			
+			listRow["properties"] = {
+				canEdit : true
+			};
+	
+			listItemsDataArray.push(listRow);	
+			
+			
+		});
+	}
+	
+	$.section.setItems(listItemsDataArray);
+	
+	//After Loading to List View mark recommended to 1	
+	if(productsColl.length > 0){
+		productsColl.each(function(record) {
+			record.set({
+					isSelected:1,
+					
+				});				
+		});
+	}
+	
+	//END	
+	Ti.API.log('Leaving loadRecommSolution UPDATE ='+JSON.stringify(productsColl));
+}
+
+ 

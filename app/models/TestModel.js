@@ -36,7 +36,9 @@ exports.definition = {
 			"Element26" : "text",
 			"Element27" : "text",
 			"Element28" : "text",
-			"Element29" : "text"			    
+			"Element29" : "text"	,
+			"isSelected":"INTEGER",
+			//"testField":"TEXT"			  
 		},
 		defaults: {
 			"Element24" : "",

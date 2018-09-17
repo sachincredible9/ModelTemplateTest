@@ -13,3 +13,243 @@
 		fontSize: 12
 	}
 }
+
+".middleSectionContainer[platform=ios formFactor=tablet]":{
+	height: "93%",
+	width:Ti.UI.FILL,
+	backgroundColor: "#ffffff"
+}
+".navigationSection[platform=ios formFactor=tablet]":{
+	height:Ti.UI.FILL,
+	width:Ti.UI.FILL
+}
+".backIcon[platform=ios formFactor=tablet]":{
+	image: "images/icons/leftarrow_white@2x.png",
+	height: "14",
+	width: "14"
+}
+".nextIcon[platform=ios formFactor=tablet]":{
+	image: "images/icons/rightarrow@2x.png",
+	height: "14",
+	width: "14",
+	left: "5"
+}
+"#backButton[platform=ios formFactor=tablet]":{
+	height: "30",
+	width: "100",
+	backgroundColor: "#239142",
+	borderRadius: "4"
+}
+"#nextButton[platform=ios formFactor=tablet]":{
+	height: "30",
+	width: "100",
+	backgroundColor: "#239142",
+	borderRadius: "4"
+}
+".productsAndServiceSection[platform=ios formFactor=tablet]":{
+	height:Ti.UI.FILL,
+	width: "35%",
+	backgroundColor: "#777777"
+}
+".productsAndServiceSection[platform=ios formFactor=handheld]":{
+	height:Ti.UI.FILL,
+	width: "100%",
+}
+".recommendedSolutionsSection":{
+	backgroundColor: "#333333"
+}
+".recommendedSolutionsLabelSection":{
+	height: "7%",
+	width:Ti.UI.FILL,
+	left: "1%"
+}
+".recommendedSolutionsLabel":{
+	color: "#ffffff",
+	left: "10"
+}
+".productsRatingSection":{
+	height: "80%",
+	top: "1%",
+	width:Ti.UI.FILL
+}
+".bestRatingSection":{
+	//height:Ti.UI.FILL,
+	width: "45%",
+	left: "2.5%"
+}
+
+".allSolutionsListView":{
+	top: 10,
+	bottom: 10,
+	right: 10,
+	left: 10,
+	backgroundColor: "#bddecb"
+}
+
+".allSolutionsTemplateContainer":{
+	backgroundColor: "#bddecb"
+}
+
+".allSolutionsLabelContainer":{
+	borderRadius: "5",
+	backgroundColor: "#ffffff",
+	top: "5",
+	bottom: "5"
+}
+
+".betterRatingSection":{
+	height:Ti.UI.FILL,
+	width: "30.5%",
+	left: "1.5%",
+	backgroundColor: "#F4D9BD"
+}
+".goodRatingSection":{
+	height:Ti.UI.FILL,
+	width: "30.5%",
+	left: "1.5%",
+	right: "1.5%",
+	backgroundColor: "#C8EAFB"
+}
+".buttonSection":{
+	top: "3%"
+}
+".deleteImageSection":{
+	height:"0",
+	width: "42%"
+}
+".deleteImage":{
+	image: "images/icons/delete@2x.png",
+	left: "3.5%",
+	height:Ti.UI.SIZE
+}
+".collapseAndEmailSection":{
+	height:Ti.UI.SIZE,
+	width:Ti.UI.FILL,
+	top: "2%",
+	left: "5%"
+}
+".collapseButton":{
+	height: "30",
+	width: "42%",
+	backgroundColor: "#777777",
+	color: "#ffffff",
+	borderRadius:"3"
+}
+".emailProposal":{
+	height: "30",
+	width: Ti.UI.SIZE,
+	left: "2%",
+	right: "2%",
+	backgroundColor: "#777777",
+	color: "#ffffff",
+	borderRadius:"3"
+}
+".productsAndServiceHeadingSection[platform=ios formFactor=tablet]":{
+	height: "7%",
+	width:"100%",//Ti.UI.FULL,
+
+	top: "1%",
+	left: "3%"
+}
+
+".productsAndServiceLabel[platform=ios formFactor=tablet]":{
+	color: "#ffffff",
+}
+".informationImage":{
+	image: "images/icons/information@2x.png" ,
+	height:Ti.UI.SIZE,
+	width:Ti.UI.SIZE,
+	left: "7%"
+}
+
+".selectedTab":{
+	backgroundColor: "#333333",
+	color: "#ffffff"
+}
+".unselectedTab":{
+	backgroundColor: "transparent",
+	color: "#000000"
+}
+".recommendedTab":{
+	height:Ti.UI.FILL,
+	width: "49.9%",
+	borderRadius: "5",
+	font:{
+		fontSize: 14,
+		fontFamily: 'Helvetica'
+	},
+	textAlign: "left"
+}
+".allTab":{
+	height:Ti.UI.FILL,
+	width: "49.9%",
+	borderRadius: "5",
+	font:{
+		fontSize: 14,
+		fontFamily: 'Helvetica'
+	},
+	textAlign: "left"
+}
+".productDescriptionContainer":{
+	borderWidth: "1",
+	borderColor: "#f2f2f2",
+	borderRadius: 2,
+	height: 0,
+	backgroundColor: "#fff",
+	width: "260",
+	left:"3%",
+	//zIndex: 100,
+	viewShadowOffset: "-2",
+	viewShadowColor: "#222",
+	bottom: "2"
+}
+".listView":{
+	listSeparatorInsets: { //changed, tableSeparatorInsets to listSeparatorInsets as tableSeparatorInsets is Depricated.
+		left: 0,
+		right: 0
+	},
+	separatorColor: "#ddd"
+}
+".listViewContainer":{
+	//borderWidth: "1",
+	borderColor: "#333333",
+	borderRadius: 2,
+	height: Ti.UI.SIZE,
+	backgroundColor: "#333333",
+	width: Ti.UI.FILL,
+	left:"3%",
+	right:"3%",
+	//zIndex: 100,
+	//viewShadowOffset: "-2",
+	//viewShadowColor: "#222",
+	bottom: "5%",
+	top:"5%"
+}
+".listItemForSolutions":{
+	//selectionStyle:Ti.UI.iOS.ListViewCellSelectionStyle.NONE
+}
+".recommendedAndAllTabContainer":{
+	height: "8%",
+	width:Ti.UI.FILL,
+}
+".recommendedTabContainer":{
+	top: "-8",
+	backgroundColor: "#777777"
+}
+
+".backButtonContainer":{
+	width : "10%",
+	height : Ti.UI.FILL
+}
+
+".noticeButtonContainer":{
+	width : "80%",
+	height : Ti.UI.FILL
+}
+
+"#noticeButton":{
+	backgroundColor : "#239142",
+	height: "30",
+	width: "100",
+	borderRadius: "4"
+}
